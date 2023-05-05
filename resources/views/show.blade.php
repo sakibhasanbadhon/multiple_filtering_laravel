@@ -25,10 +25,9 @@
                     <div class="card-body">
 
                         <div class="d-flex">
-                            <form action="{{ route('filter.get-data') }}" method="POST">
-                                @csrf
+                            {{-- <form action="{{ route('filter.get-data') }}" method="post">@csrf
                                 <select class="form-select" id="mySelect" name="name"  aria-label="Default select example">
-                                    <option value=""> -- select Agent -- </option>
+                                    <option selected> -- select Agent -- </option>
                                     @foreach ($filter as $item)
                                         <option value="{{ $item->agentName ?? '' }}"> {{ $item->agentName ?? '' }}</option>
 
@@ -37,7 +36,7 @@
                                 </select>
                                 <button type="submit" class="btn btn-primary">search</button>
 
-                            </form>
+                            </form> --}}
 
 
                             {{-- <select class="form-select">
@@ -72,35 +71,41 @@
             </div>
 
             <div class="col-md-3 p-2">
-                <div class="card bg-info text-white">
+                <div class="card bg-danger text-white">
                     <div class="card-body">
-                        {{-- @forelse ($filterData as $filter) --}}
-                            {{-- <h3 class="count-card-title"> {{ $filterData->openCall }} </h3> --}}
-                        {{-- @empty
-                        <h3 class="count-card-title"> 0 </h3>
-                        @endforelse --}}
-
-                        <h3 class="count-card-title"> 0</h3>
+                        {{-- <h3 class="count-card-title"> {{ $sum }} </h3> --}}
+                        @foreach ($sum as $item)
+                            <h3 class="count-card-title"> {{ $item }} </h3>
+                        @endforeach
                         <h3 class="count-card-text"> Total Call</h3>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-3 p-2">
-                <div class="card bg-danger text-white">
+                <div class="card bg-info text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0 </h3>
-                        <h3 class="count-card-text"> Open Call </h3>
+
+                        @foreach ($filterData as $item)
+                            <h3 class="count-card-title"> {{ $item->openCall }} </h3>
+                        @endforeach
+
+                        {{-- <h3 class="count-card-title"> {{ $data->agentName }}</h3> --}}
+                        <h3 class="count-card-text"> Open Call</h3>
                     </div>
                 </div>
             </div>
 
 
+
+
             <div class="col-md-3 p-2">
                 <div class="card bg-success text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0</h3>
-                        <h3 class="count-card-text">Close Call </h3>
+                        @foreach ($filterData as $item)
+                            <h3 class="count-card-title"> {{ $item->closeCall }} </h3>
+                        @endforeach
+                        <h3 class="count-card-text"> Close Call</h3>
                     </div>
                 </div>
             </div>
@@ -109,8 +114,10 @@
             <div class="col-md-3 p-2">
                 <div class="card bg-warning text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0</h3>
-                        <h3 class="count-card-text"> Potential</h3>
+                        @foreach ($filterData as $item)
+                            <h3 class="count-card-title"> {{ $item->potential }} </h3>
+                        @endforeach
+                        <h3 class="count-card-text"> Potential </h3>
                     </div>
                 </div>
             </div>
@@ -123,38 +130,7 @@
 
 
 
-    <h1 id="demo"></h1>
 
-    <script>
-
-
-
-
-    $(document).ready(function() {
-        $('').on('submit', function() {
-
-            var formData = $(this).serialize();
-            $.ajax({
-                url: {{ route('filter.get-data') }},
-                type: 'POST',
-                data: formData,
-                success: function(data) {
-                    // Use the data to update your HTML
-                },
-                error: function(xhr) {
-                    // Handle error
-                }
-            });
-        });
-    });
-
-
-
-
-
-
-
-    </script>
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

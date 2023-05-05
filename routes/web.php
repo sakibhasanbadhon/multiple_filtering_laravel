@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\FilterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FilterController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::resource('filter', FilterController::class);
 
 Route::post('filter/get-data',[FilterController::class, 'filterGetData'])->name('filter.get-data');
+
+

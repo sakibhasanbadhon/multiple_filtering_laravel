@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Filter;
+use Dflydev\DotAccessData\Data;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\DB;
 
 class FilterController extends Controller
 {
@@ -52,14 +55,19 @@ class FilterController extends Controller
 
     public function filterGetData(Request $request)
     {
-        dd($request->all());
+        // return $request;
+        // $data = DB::table('filters');
+        
+        $data = Filter::where('agentName', '=' , $request->name)->get();
 
+        if ($data) {
+            $total = Filter::where('id',$data)->sum('openCall+closeCall+potential')->get();
+            
+        }
 
-        // if ($request->ajax()) {
+        return view('show',['filterData'=>$data,'sum'=>$total]);
 
-        //     // Console.log($request->all());
-        //     console.log("Hello world!");
-        // }
+        return back();
     }
 
     /**
