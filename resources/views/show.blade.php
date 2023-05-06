@@ -74,9 +74,9 @@
                 <div class="card bg-danger text-white">
                     <div class="card-body">
                         {{-- <h3 class="count-card-title"> {{ $sum }} </h3> --}}
-                        @foreach ($sum as $item)
+                        {{-- @foreach ($total as $item)
                             <h3 class="count-card-title"> {{ $item }} </h3>
-                        @endforeach
+                        @endforeach --}}
                         <h3 class="count-card-text"> Total Call</h3>
                     </div>
                 </div>

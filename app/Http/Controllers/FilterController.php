@@ -16,8 +16,22 @@ class FilterController extends Controller
      */
     public function index()
     {
-        $filter = Filter::orderBy('id','DESC')->get();
-        return view('index',['filter'=>$filter]);
+
+        $agents = Filter::select('id','agentName')->get();
+        $total_call = Filter::get()->count();
+        $open_call = Filter::where('call_status',1)->get()->count();
+        $close_call = Filter::where('call_status',2)->get()->count();
+        $potential = Filter::where('potential',1)->get()->count();
+
+        $data = [
+            'agents'=>$agents,
+            'total_call'=>$total_call,
+            'open_call'=>$open_call,
+            'close_call'=>$close_call,
+            'potential'=>$potential
+        ];
+
+        return view('index',$data);
     }
 
     /**
@@ -33,19 +47,10 @@ class FilterController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
-        $request->validate([
-            'agentName' => 'required',
-            'openCall'  => 'required',
-            'closeCall' => 'required',
-            'potential' => 'required'
-        ]);
-
 
         Filter::create([
             'agentName' => $request->agentName,
-            'openCall' => $request->openCall,
-            'closeCall' =>$request->closeCall,
+            'call_status' => $request->call_status,
             'potential' =>$request->potential
         ]);
 
@@ -55,17 +60,21 @@ class FilterController extends Controller
 
     public function filterGetData(Request $request)
     {
-        // return $request;
-        // $data = DB::table('filters');
-        
+
         $data = Filter::where('agentName', '=' , $request->name)->get();
 
         if ($data) {
-            $total = Filter::where('id',$data)->sum('openCall+closeCall+potential')->get();
-            
+            $open_call = Filter::where('agentName', $data)->where('call_status',1)->get()->count();
+
+
+
         }
 
-        return view('show',['filterData'=>$data,'sum'=>$total]);
+
+
+        // SELECT sum(social + math + science ) as total FROM student_sum
+
+        return view('index',$open_call);
 
         return back();
     }

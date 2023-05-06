@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->id();
             $table->string('agentName');
-            $table->integer('openCall');
-            $table->integer('closeCall');
-            $table->integer('potential');
+            $table->integer('call_status')->nullable();
+            $table->integer('potential')->nullable();
             $table->timestamps();
         });
     }

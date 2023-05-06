@@ -40,24 +40,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="openCall">Open call</label>
-                                <input type="number" name="openCall" id="openCall" class="form-control">
-                                @error('openCall')
-                                    <div class="bg-info mt-2 p-3 text-white">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="closeCall">Close call</label>
-                                <input type="number" name="closeCall" id="closeCall" class="form-control">
-                                @error('closeCall')
+                                <label for="openCall">Call Status</label>
+                                <select name="call_status" id="" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                @error('call_status')
                                     <div class="bg-info mt-2 p-3 text-white">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="potential">Potential</label>
-                                <input type="number" name="potential" id="potential" class="form-control">
+                                <select name="potential" id="" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
                                 @error('potential')
                                     <div class="bg-info mt-2 p-3 text-white">{{ $message }}</div>
                                 @enderror

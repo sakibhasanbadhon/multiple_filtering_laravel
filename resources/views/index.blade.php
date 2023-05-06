@@ -29,8 +29,8 @@
                                 @csrf
                                 <select class="form-select" id="mySelect" name="name"  aria-label="Default select example">
                                     <option value=""> -- select Agent -- </option>
-                                    @foreach ($filter as $item)
-                                        <option value="{{ $item->agentName ?? '' }}"> {{ $item->agentName ?? '' }}</option>
+                                    @foreach ($agents as $item)
+                                        <option value="{{ $item->id}}"> {{ $item->agentName }}</option>
 
                                     @endforeach
 
@@ -74,13 +74,9 @@
             <div class="col-md-3 p-2">
                 <div class="card bg-info text-white">
                     <div class="card-body">
-                        {{-- @forelse ($filterData as $filter) --}}
-                            {{-- <h3 class="count-card-title"> {{ $filterData->openCall }} </h3> --}}
-                        {{-- @empty
-                        <h3 class="count-card-title"> 0 </h3>
-                        @endforelse --}}
 
-                        <h3 class="count-card-title"> 0</h3>
+                        <h3 class="count-card-title">{{ $total_call }}</h3>
+
                         <h3 class="count-card-text"> Total Call</h3>
                     </div>
                 </div>
@@ -89,7 +85,7 @@
             <div class="col-md-3 p-2">
                 <div class="card bg-danger text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0 </h3>
+                        <h3 class="count-card-title"> {{ $open_call }} </h3>
                         <h3 class="count-card-text"> Open Call </h3>
                     </div>
                 </div>
@@ -99,7 +95,7 @@
             <div class="col-md-3 p-2">
                 <div class="card bg-success text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0</h3>
+                        <h3 class="count-card-title"> {{ $close_call }} </h3>
                         <h3 class="count-card-text">Close Call </h3>
                     </div>
                 </div>
@@ -109,7 +105,7 @@
             <div class="col-md-3 p-2">
                 <div class="card bg-warning text-white">
                     <div class="card-body">
-                        <h3 class="count-card-title"> 0</h3>
+                        <h3 class="count-card-title"> {{ $potential }} </h3>
                         <h3 class="count-card-text"> Potential</h3>
                     </div>
                 </div>

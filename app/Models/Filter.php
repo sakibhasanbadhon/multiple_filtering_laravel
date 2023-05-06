@@ -11,8 +11,7 @@ class Filter extends Model
 
     protected $fillable=[
         'agentName',
-        'openCall',
-        'closeCall',
+        'call_status',
         'potential'
     ];
 }
